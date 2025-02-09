@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:guia_project/components/appBar.dart';
+import 'package:guia_project/components/app_bar.dart';
 import 'package:guia_project/components/buttons.dart';
+import 'package:guia_project/components/card_motel.dart';
+import 'package:guia_project/components/card_promo.dart';
+import 'package:guia_project/components/filter_bar.dart';
 
 void main() {
   runApp(const MyApp());
@@ -9,27 +12,11 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
@@ -40,16 +27,6 @@ class MyApp extends StatelessWidget {
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
   final String title;
 
   @override
@@ -57,32 +34,14 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 222, 21, 31),
+      backgroundColor: const Color.fromARGB(255, 222, 21, 31),
       appBar: GenericAppBar(),
       body: Column(
         children: [
+          // CustomDropdown (mantido no topo)
           Container(
             decoration: const BoxDecoration(
               borderRadius: BorderRadius.only(
@@ -92,130 +51,119 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             child: CustomDropdown(),
           ),
+
+          // Parte rolável com bordas arredondadas
           Expanded(
-            // Permite que o conteúdo dentro da Stack ocupe o espaço disponível
-            child: Stack(
-              children: <Widget>[
-                Container(
-                  width: double.infinity,
-                  decoration: const BoxDecoration(
-                    color: Color.fromARGB(255, 240, 240, 240),
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(25.0),
-                      topRight: Radius.circular(25.0),
+            child: ClipRRect(
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(25.0),
+                topRight: Radius.circular(25.0),
+              ),
+              child: Container(
+                color: const Color.fromARGB(255, 240, 240, 240),
+                child: CustomScrollView(
+                  slivers: [
+                    // Primeiro Card (acima da FilterBar)
+                    const SliverToBoxAdapter(
+                      child: Padding(
+                        padding: EdgeInsets.only(top: 10),
+                        child: CardPromo(
+                          imageUrl:
+                              'https://cdn.guiademoteis.com.br/imagens/suites/big/3148_big_9828_2.jpg',
+                          name: 'Alí Motel',
+                          location: 'Emaús - Parnamirim',
+                          price: 57.98,
+                        ),
+                      ),
                     ),
-                  ),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
-                        const SizedBox(height: 20),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const Text("Conteúdo do Scroll"),
-                        const SizedBox(height: 20),
-                        // Adicione mais widgets aqui para testar a rolagem
-                      ],
+
+                    // FilterBar (gruda no topo quando está prestes a sair da tela)
+                    SliverPersistentHeader(
+                      pinned: true, // Faz a barra "grudar" no topo
+                      floating:
+                          true, // Permite que a barra apareça rapidamente ao rolar para cima
+                      delegate: _SliverAppBarDelegate(
+                        minHeight: 60.0,
+                        maxHeight: 60.0,
+                        child: Container(
+                          decoration: const BoxDecoration(
+                              color: Color.fromARGB(255, 248, 249, 251),
+                              border: Border(
+                                bottom: BorderSide(
+                                    color: Color.fromARGB(255, 201, 201, 201),
+                                    width: 1,
+                                    style: BorderStyle.solid),
+                              )),
+                          width: double.infinity,
+                          height: 60,
+                          child: Stack(
+                            children: [
+                              Center(
+                                child: Container(
+                                  height: 35,
+                                  child: FilterBar(),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
                     ),
-                  ),
-                )
-              ],
+
+                    // Lista de Cards
+                    SliverList(
+                      delegate: SliverChildBuilderDelegate(
+                        (context, index) {
+                          return CardMotel(
+                            imageUrl:
+                                'https://cdn.guiademoteis.com.br/imagens/suites/big/3148_big_9828_2.jpg',
+                            name: 'Alí Motel',
+                            location: 'Emaús - Parnamirim',
+                            price: 57.98,
+                          );
+                        },
+                        childCount: 10,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
-          )
+          ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
     );
+  }
+}
+
+// Delegate para o SliverPersistentHeader
+class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
+  _SliverAppBarDelegate({
+    required this.minHeight,
+    required this.maxHeight,
+    required this.child,
+  });
+
+  final double minHeight;
+  final double maxHeight;
+  final Widget child;
+
+  @override
+  double get minExtent => minHeight;
+
+  @override
+  double get maxExtent => maxHeight;
+
+  @override
+  Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
+    return SizedBox.expand(child: child);
+  }
+
+  @override
+  bool shouldRebuild(_SliverAppBarDelegate oldDelegate) {
+    return maxHeight != oldDelegate.maxHeight ||
+        minHeight != oldDelegate.minHeight ||
+        child != oldDelegate.child;
   }
 }

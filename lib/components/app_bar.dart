@@ -17,6 +17,7 @@ class _GenericAppBarState extends State<GenericAppBar> {
   Widget build(BuildContext context) {
     return AppBar(
       title: const SingleChoice(),
+      scrolledUnderElevation: 0,
       centerTitle: true,
       backgroundColor: Color.fromARGB(255, 222, 21, 31),
       leading: Container(
