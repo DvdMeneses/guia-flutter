@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class CardPrice extends StatelessWidget {
   final String time;
@@ -12,41 +13,52 @@ class CardPrice extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // formatter price
+    double parsedPrice = double.tryParse(price) ?? 0.0;
+    String formattedPrice = NumberFormat.currency(
+      locale: 'pt_BR',
+      symbol: 'R\$',
+      decimalDigits: 2,
+    ).format(parsedPrice);
+
     return Card(
       color: Colors.white,
-      child: Container(
-          child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  time,
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                Text(
-                  'R\$ ${price}', // Exibe "R$" seguido do valor de `price`
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
-                ),
-              ],
-            ),
-            Container(
-              child: Icon(
-                Icons.chevron_right_rounded,
-                size: 30,
+      child: SizedBox(
+        width: 350,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    time,
+                    style: const TextStyle(
+                        fontSize: 20, fontWeight: FontWeight.w500),
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  Text(
+                    formattedPrice,
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+                  ),
+                ],
               ),
-            )
-          ],
+              Container(
+                child: const Icon(
+                  Icons.chevron_right_rounded,
+                  size: 30,
+                ),
+              )
+            ],
+          ),
         ),
-      )),
+      ),
     );
   }
 }

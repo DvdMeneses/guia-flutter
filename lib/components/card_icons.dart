@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:guia_project/models/category_item.dart';
 
 class CardIcons extends StatelessWidget {
+  final List<CategoryItem> itens;
+
   const CardIcons({
     Key? key,
+    required this.itens,
   }) : super(key: key);
 
   @override
@@ -10,70 +14,26 @@ class CardIcons extends StatelessWidget {
     return Card(
       color: Colors.white,
       child: Container(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-          child: Row(
+        width: 350,
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+        child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              // Usando Flexible para os ícones
-              Flexible(
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: const Color.fromARGB(255, 248, 249, 251),
-                  ),
-                  height: 50,
-                  child: Image.network(
-                    "https://cdn.guiademoteis.com.br/Images/itens-suites/garagem-privativa-04-09-2018-12-14.png",
-                    fit: BoxFit.contain, // Ajusta a imagem ao contêiner
-                  ),
-                ),
-              ),
-              SizedBox(width: 10), // Espaçamento entre os ícones
-              Flexible(
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: const Color.fromARGB(255, 248, 249, 251),
-                  ),
-                  height: 50,
-                  child: Image.network(
-                    "https://cdn.guiademoteis.com.br/Images/itens-suites/garagem-privativa-04-09-2018-12-14.png",
-                    fit: BoxFit.contain,
-                  ),
-                ),
-              ),
-              SizedBox(width: 10),
-              Flexible(
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: const Color.fromARGB(255, 248, 249, 251),
-                  ),
-                  height: 50,
-                  child: Image.network(
-                    "https://cdn.guiademoteis.com.br/Images/itens-suites/garagem-privativa-04-09-2018-12-14.png",
-                    fit: BoxFit.contain,
-                  ),
-                ),
-              ),
-              SizedBox(width: 10),
-              Flexible(
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: const Color.fromARGB(255, 248, 249, 251),
-                  ),
-                  height: 50,
-                  child: Image.network(
-                    "https://cdn.guiademoteis.com.br/Images/itens-suites/garagem-privativa-04-09-2018-12-14.png",
-                    fit: BoxFit.contain,
-                  ),
-                ),
-              ),
-              SizedBox(width: 10),
-              // Container do "ver todos" com Flexible
+              ...itens.take(4).map((item) => Flexible(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: const Color.fromARGB(255, 248, 249, 251),
+                      ),
+                      height: 50,
+                      child: Image.network(
+                        item.icone, // get icon url
+                        fit: BoxFit.contain,
+                      ),
+                    ),
+                  )),
+              const SizedBox(width: 10),
               Flexible(
                 child: Container(
                   height: 50,
@@ -99,9 +59,7 @@ class CardIcons extends StatelessWidget {
                           ),
                         ],
                       ),
-                      SizedBox(
-                        width: 5,
-                      ),
+                      SizedBox(width: 5),
                       Icon(
                         Icons.keyboard_arrow_down_rounded,
                         size: 16,
@@ -111,9 +69,7 @@ class CardIcons extends StatelessWidget {
                   ),
                 ),
               ),
-            ],
-          ),
-        ),
+            ]),
       ),
     );
   }

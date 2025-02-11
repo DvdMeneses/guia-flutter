@@ -7,7 +7,6 @@ class FilterBar extends StatefulWidget implements PreferredSizeWidget {
   @override
   _FilterBarState createState() => _FilterBarState();
 
-  // Define a altura total da FilterBar (ex.: 60)
   @override
   Size get preferredSize => const Size.fromHeight(60);
 }
@@ -36,9 +35,8 @@ class _FilterBarState extends State<FilterBar> {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      // Altura definida para a barra de filtros
       child: ListView(
-        shrinkWrap: true, // Usa somente o espaço necessário
+        shrinkWrap: true,
         scrollDirection: Axis.horizontal,
         children: filterOptions.map((option) {
           return Padding(

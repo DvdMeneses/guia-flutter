@@ -70,7 +70,6 @@ class CustomDropdown extends StatefulWidget {
 }
 
 class _CustomDropdownState extends State<CustomDropdown> {
-  // Valor inicial do botão
   String dropdownValue = 'natal e região';
 
   @override
@@ -79,7 +78,7 @@ class _CustomDropdownState extends State<CustomDropdown> {
       padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 15),
       child: Container(
         constraints: const BoxConstraints(
-          maxWidth: 130, // Limita a largura do Container
+          maxWidth: 130,
         ),
         padding: const EdgeInsets.all(0),
         decoration: const BoxDecoration(
@@ -89,20 +88,17 @@ class _CustomDropdownState extends State<CustomDropdown> {
           ),
         ),
         child: const Row(
-          mainAxisSize:
-              MainAxisSize.min, // Para não ocupar mais espaço do que necessário
+          mainAxisSize: MainAxisSize.min,
           children: [
-            // Texto adaptável com reticências se exceder o limite
             Expanded(
-              // Usado para garantir que o texto se ajuste ao Container
               child: Text(
                 "natal e região",
                 style: TextStyle(
                     color: Colors.white,
                     fontSize: 16,
                     fontWeight: FontWeight.bold),
-                maxLines: 1, // Limita a 1 linha
-                overflow: TextOverflow.ellipsis, // Exibe reticências
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
               ),
             ),
             Icon(

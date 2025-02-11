@@ -24,7 +24,6 @@ class CardPromo extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: Row(
           children: [
-            // Imagem à esquerda
             ClipRRect(
               borderRadius: BorderRadius.circular(8),
               child: Image.network(
@@ -34,8 +33,7 @@ class CardPromo extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
             ),
-            SizedBox(width: 12), // Espaço entre imagem e textos
-            // Textos e botão à direita
+            SizedBox(width: 12),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -53,8 +51,7 @@ class CardPromo extends StatelessWidget {
                         alignment: Alignment.topLeft,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(
-                                top: 18), // Ajuste fino de posição
+                            padding: const EdgeInsets.only(top: 18),
                             child: Text(
                               location.toLowerCase(),
                               style: TextStyle(
@@ -93,17 +90,17 @@ class CardPromo extends StatelessWidget {
                         ),
                         const Divider(
                           color: Colors.white,
-                          thickness: 2, // Espessura do Divider
-                          indent: 10, // Espaço à esquerda
-                          endIndent: 10, // Espaço à direita
+                          thickness: 2,
+                          indent: 10,
+                          endIndent: 10,
                         ),
-                        Text(
-                          "A partir de R\$ ${price.toStringAsFixed(2)}",
-                          style: TextStyle(
-                              fontSize: 12, fontWeight: FontWeight.bold),
-                        ),
-                        SizedBox(
-                          height: 5,
+                        Padding(
+                          padding: EdgeInsets.only(bottom: 5),
+                          child: Text(
+                            "A partir de R\$ ${price.toStringAsFixed(2)}",
+                            style: TextStyle(
+                                fontSize: 12, fontWeight: FontWeight.bold),
+                          ),
                         ),
                         Container(
                           width: double.infinity,
@@ -118,9 +115,7 @@ class CardPromo extends StatelessWidget {
                                 horizontal: 16,
                               ),
                             ),
-                            onPressed: () {
-                              // Ação ao clicar no botão
-                            },
+                            onPressed: () {},
                             child: const Row(
                               mainAxisSize: MainAxisSize.min,
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -133,15 +128,13 @@ class CardPromo extends StatelessWidget {
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold),
                                 ),
-                                SizedBox(
-                                    width: 5), // Espaço entre texto e ícone
+                                SizedBox(width: 5),
                                 Align(
                                   alignment: Alignment.center,
                                   child: Icon(
                                     Icons.arrow_forward_ios_rounded,
                                     color: Colors.white,
-                                    size:
-                                        12, // Ajuste do tamanho do ícone para melhor alinhamento
+                                    size: 12,
                                   ),
                                 ),
                               ],
