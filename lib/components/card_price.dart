@@ -20,7 +20,6 @@ class CardPrice extends StatelessWidget {
       symbol: 'R\$',
       decimalDigits: 2,
     ).format(parsedPrice);
-
     return Card(
       color: Colors.white,
       child: SizedBox(

@@ -5,41 +5,52 @@ import 'package:http/http.dart' as http;
 
 class Moteis with ChangeNotifier {
   List<Motel> _moteis = [];
+  late final http.Client client;
+
+  Moteis({http.Client? client}) {
+    this.client = client ?? http.Client();
+  }
 
   List<Motel> get moteis => _moteis;
 
   Future<void> fetchMotelData() async {
-    final response =
-        await http.get(Uri.parse('https://www.jsonkeeper.com/b/1IXK'));
+    _moteis = [];
+    notifyListeners();
 
-    print("Response Status: ${response.statusCode}");
+    try {
+      final response =
+          await client.get(Uri.parse('https://www.jsonkeeper.com/b/1IXK'));
 
-    // Check if the response is successful (status code 200)
-    if (response.statusCode == 200) {
-      var decodedResponse = utf8.decode(response.bodyBytes);
-      // Decode the JSON data from the response
-      var data = jsonDecode(decodedResponse);
-      // Check if the response contains 'data' and 'moteis'
-      if (data != null &&
-          data['data'] != null &&
-          data['data']['moteis'] != null) {
-        List<Motel> fetchedMoteis = (data['data']['moteis'] as List)
-            .map((motelJson) => Motel.fromJson(motelJson))
-            .toList();
+      print("Response Status: ${response.statusCode}");
 
-        _moteis = fetchedMoteis;
-        notifyListeners();
-        print("Moteis Fetched: $_moteis");
+      if (response.statusCode == 200 && response.body.isNotEmpty) {
+        var decodedResponse = utf8.decode(response.bodyBytes);
+        dynamic data;
+        try {
+          data = jsonDecode(decodedResponse);
+        } catch (e) {
+          print("Erro ao decodificar JSON: $e");
+          return;
+        }
+
+        if (data is Map &&
+            data.containsKey('data') &&
+            data['data'] is Map &&
+            data['data'].containsKey('moteis') &&
+            data['data']['moteis'] is List) {
+          _moteis = (data['data']['moteis'] as List)
+              .map((motelJson) => Motel.fromJson(motelJson))
+              .toList();
+        } else {
+          print("Estrutura de JSON inválida.");
+        }
       } else {
-        _moteis = [];
-        notifyListeners();
-        print("No motels data found.");
+        print("Resposta vazia ou código de status inválido.");
       }
-    } else {
-      _moteis = [];
-      notifyListeners();
-      print("Failed to load data: ${response.statusCode}");
+    } catch (e) {
+      print("Erro ao buscar motéis: $e");
     }
+    notifyListeners();
   }
 }
 

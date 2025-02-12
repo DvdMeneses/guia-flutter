@@ -137,7 +137,10 @@ class _CardMotelState extends State<CardMotel> {
                   margin: const EdgeInsets.only(right: 16),
                   child: Column(
                     children: [
-                      CardImage(suite: widget.motel.suites[index]),
+                      CardImage(
+                        suite: widget.motel.suites[index],
+                        LocalImage: '',
+                      ),
                       CardIcons(
                         itens: widget.motel.suites[index].categoriaItens,
                       ),

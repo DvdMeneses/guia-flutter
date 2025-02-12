@@ -5,10 +5,12 @@ import 'package:guia_project/models/suites.dart';
 
 class CardImage extends StatelessWidget {
   final Suite suite;
+  final String LocalImage;
 
   const CardImage({
     Key? key,
     required this.suite,
+    required this.LocalImage,
   }) : super(key: key);
 
   @override
@@ -29,10 +31,15 @@ class CardImage extends StatelessWidget {
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(8),
-                child: Image.network(
-                  "${suite.fotos[0]}",
-                  fit: BoxFit.cover,
-                ),
+                child: LocalImage.length > 10
+                    ? Image.asset(
+                        'assets/images/local_image.jpg', // Usa a imagem local
+                        fit: BoxFit.cover,
+                      )
+                    : Image.network(
+                        "${suite.fotos[0]}", // Usa a imagem da rede
+                        fit: BoxFit.cover,
+                      ),
               ),
               Padding(
                 padding: EdgeInsets.only(top: 12, bottom: 8),
